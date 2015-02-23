@@ -40,13 +40,20 @@ hold = Polynomial go
         CP _ r <- cps !? li
         return r
 
--- |1-degree polynomial – a.k.a. /straight line interpolation/, or /linear
--- interpolation/.
+-- |Parametric linear polynomial.
 --
--- This polynomial connects control points with straight lines
-linear :: (Additive a,Fractional s,Ord s) => Polynomial s (a s)
-linear = linearBy id
-
+-- This form applies a pre-filter on the input before performing a linear
+-- interpolation. Instead of:
+--
+-- @ lerp x a b @
+--
+-- We have:
+--
+-- @ lerp (pref x) a b @
+--
+-- This can be used to implement 1-degree splines if @pref = id@, basic cubic
+-- non-hermitian splines if @pref = (^3)@, cosine splines if
+-- @pref = \x -> (1 - cos (x*pi)) * 0.5@, and so on and so forth.
 linearBy :: (Additive a,Fractional s,Ord s) => (s -> s) -> Polynomial s (a s)
 linearBy pref = Polynomial go
   where
@@ -58,6 +65,15 @@ linearBy pref = Polynomial go
     lerp_ x (CP s0 a) (CP s1 b) = lerp x' b a
       where
         x' = (pref x - s0) / (s1 - s0)
+
+-- |1-degree polynomial – a.k.a. /straight line interpolation/, or /linear
+-- interpolation/.
+--
+-- This polynomial connects control points with straight lines.
+--
+-- Note: implemented with @linearBy id@.
+linear :: (Additive a,Fractional s,Ord s) => Polynomial s (a s)
+linear = linearBy id
 
 -- |Helper binary search that search the ceiling index for the
 -- value to be searched according to the predicate.
