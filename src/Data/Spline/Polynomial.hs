@@ -15,6 +15,8 @@ module Data.Spline.Polynomial (
     -- * Polynomials for interpolation
   , hold
   , linear
+  , linearBy
+  , cosine
     -- * Helpers
   , bsearchLower
   ) where
@@ -74,6 +76,10 @@ linearBy pref = Polynomial go
 -- Note: implemented with @linearBy id@.
 linear :: (Additive a,Fractional s,Ord s) => Polynomial s (a s)
 linear = linearBy id
+
+-- |Cosine polynomial.
+cosine :: (Additive a,Floating s,Ord s) => Polynomial s (a s)
+cosine = linearBy $ \x -> (1 - cos (x * pi)) * 0.5
 
 -- |Helper binary search that search the ceiling index for the
 -- value to be searched according to the predicate.
