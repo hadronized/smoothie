@@ -45,7 +45,10 @@ hold = Polynomial go
 --
 -- This polynomial connects control points with straight lines
 linear :: (Additive a,Fractional s,Ord s) => Polynomial s (a s)
-linear = Polynomial go
+linear = linearBy id
+
+linearBy :: (Additive a,Fractional s,Ord s) => (s -> s) -> Polynomial s (a s)
+linearBy pref = Polynomial go
   where
     go s cps = do
         li <- bsearchLower (\(CP s' _) -> compare s s') cps
@@ -54,7 +57,7 @@ linear = Polynomial go
         return $ lerp_ s lower upper
     lerp_ x (CP s0 a) (CP s1 b) = lerp x' b a
       where
-        x' = (x - s0) / (s1 - s0)
+        x' = (pref x - s0) / (s1 - s0)
 
 -- |Helper binary search that search the ceiling index for the
 -- value to be searched according to the predicate.
