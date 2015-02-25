@@ -14,10 +14,10 @@ module Data.Spline.CP (
     CP(..)
   ) where
 
--- | A 'CP' is a **control point**. A curve passes through control points and
+-- | A 'CP' is a *control point*. A curve passes through control points and
 -- the shape of the curve is determined by the polynomials used to interpolate
 -- values in between.
 --
--- 'CP s a' is a control point of sampling type 's' and carried type 'a'. In
+-- @CP s a@ is a control point of sampling type 's' and carried type 'a'. In
 -- most cases, 's' must be 'Ord' and 'a' must be 'Additive' and 'Fractional'.
 data CP s a = CP !s !a deriving (Functor,Eq,Ord,Show)

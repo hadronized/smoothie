@@ -7,7 +7,7 @@
 -- Stability   : experimental
 -- Portability : portable
 --
--- A 'Spline s a' represents a curve in which 'a' is very likely to be
+-- A @Spline s a@ represents a curve in which 'a' is very likely to be
 -- 'Additive' (see "linear") and 's' is the sampling type.
 --
 -- The library exports two useful functions: 'spline' and 'smooth'. The former
@@ -29,7 +29,7 @@ import Data.Spline.CP
 import Data.Spline.Polynomial ( Polynomial(..), bsearchLower )
 import Data.Vector ( Vector, (!?), fromList )
 
--- |A 'Spline' is a collection of control points with associated polynomials.
+-- |A @Spline@ is a collection of control points with associated polynomials.
 -- Given two control points which indices are /i/ and /i+1/, interpolation on
 -- the resulting curve is performed using the polynomial of indice /i/. Thus,
 -- the latest control point is ignored and can be set to whatever the user wants
