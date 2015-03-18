@@ -1,5 +1,5 @@
 name:                smoothie
-version:             0.1.1
+version:             0.1.2
 synopsis:            Smooth curves via several splines and polynomials.
 description:         This package exports several splines and curves you can use
                      to interpolate points in between.
@@ -28,7 +28,7 @@ library
 
 
   build-depends:       base   >= 4.7  && < 4.8
-                     , linear >= 1.16 && < 1.18
+                     , linear >= 1.16 && < 1.19
                      , vector >= 0.10 && < 0.11
 
   hs-source-dirs:      src
