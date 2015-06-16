@@ -20,11 +20,13 @@ library
 
   ghc-options:         -W -Wall -O2 -funbox-strict-fields
 
-  default-extensions:  DeriveFunctor
+  default-extensions:  DeriveFoldable
+                     , DeriveFunctor
+                     , DeriveTraversable
 
   exposed-modules:     Data.Spline
-                    , Data.Spline.CP
-                    , Data.Spline.Polynomial
+                     , Data.Spline.CP
+                     , Data.Spline.Polynomial
 
 
   build-depends:       base   >= 4.7  && < 5.0
