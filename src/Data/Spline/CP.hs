@@ -20,4 +20,4 @@ module Data.Spline.CP (
 --
 -- @CP s a@ is a control point of sampling type 's' and carried type 'a'. In
 -- most cases, 's' must be 'Ord' and 'a' must be 'Additive' and 'Fractional'.
-data CP s a = CP !s !a deriving (Functor,Eq,Ord,Show)
+data CP s a = CP !s !a deriving (Foldable,Functor,Eq,Ord,Show,Traversable)

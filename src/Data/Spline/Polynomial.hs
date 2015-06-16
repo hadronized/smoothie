@@ -95,4 +95,4 @@ bsearchLower p v = go 0 (pred $ V.length v)
           EQ -> Just m
           GT -> if p ma1 == LT then Just m else go (succ m) end
       where
-        m = (end + start) `div` 2
+        m = (end + start) `div` 2
