@@ -43,7 +43,6 @@ data Spline s a = Spline (Vector (CP s a)) (Vector (Polynomial s a))
 spline :: (Ord a,Ord s) => [(CP s a,Polynomial s a)] -> Spline s a
 spline = uncurry spline_ . unzip . dupLast . sortBy (comparing fst)
   where
-    dupLast s = s ++ [last s]
     spline_ cps polys = Spline (fromList cps) (fromList polys)
 
 -- |Smoothly interpolate a point on a spline.
@@ -52,3 +51,10 @@ smooth (Spline cps polys) s = do
   i <- bsearchLower (\(CP s' _) -> compare s s') cps
   p <- polys !? i
   unPolynomial p s cps
+
+-- Duplicate the last element in a list.
+--
+-- Warning: unsafe function.
+dupLast :: [a] -> [a]
+dupLast [x] = [x,x]
+dupLast (x:xs) = x : dupLast xs
