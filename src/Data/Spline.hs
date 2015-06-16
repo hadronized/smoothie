@@ -19,8 +19,8 @@ module Data.Spline (
     -- * Spline
     Spline
   , spline
-    -- * Smoothing values along splines
-  , smooth
+    -- * Sampling values from splines
+  , sample
   ) where
 
 import Data.List ( sortBy )
@@ -45,9 +45,9 @@ spline = uncurry spline_ . unzip . dupLast . sortBy (comparing fst)
   where
     spline_ cps polys = Spline (fromList cps) (fromList polys)
 
--- |Smoothly interpolate a point on a spline.
-smooth :: (Ord s) => Spline s a -> s -> Maybe a
-smooth (Spline cps polys) s = do
+-- |Sample a point on a spline.
+sample :: (Ord s) => Spline s a -> s -> Maybe a
+sample (Spline cps polys) s = do
   i <- bsearchLower (\(CP s' _) -> compare s s') cps
   p <- polys !? i
   unPolynomial p s cps
