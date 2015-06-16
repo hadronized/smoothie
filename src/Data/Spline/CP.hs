@@ -14,7 +14,7 @@ module Data.Spline.CP (
     CP(..)
   ) where
 
--- | A 'CP' is a *control point*. A curve passes through control points and
+-- | A 'CP' is a **control point**. A curve passes through control points and
 -- the shape of the curve is determined by the polynomials used to interpolate
 -- values in between.
 --

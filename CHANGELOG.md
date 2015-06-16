@@ -1,6 +1,12 @@
+## 0.2
+
+- Function 'smooth' has a new name; 'sample'.
+- Enhanced internal implementation.
+- Fixed some documentation formatting issues.
+
 ## 0.1.3
 
-- Support for GHC 7.10
+- Support for GHC 7.10.
 
 ## 0.1.2
 
