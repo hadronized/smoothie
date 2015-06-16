@@ -56,5 +56,6 @@ sample (Spline cps polys) s = do
 --
 -- Warning: unsafe function.
 dupLast :: [a] -> [a]
+dupLast [] = []
 dupLast [x] = [x,x]
 dupLast (x:xs) = x : dupLast xs
