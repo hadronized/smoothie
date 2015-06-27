@@ -1,3 +1,11 @@
+## 0.2.2
+
+- Added cubicHermite.
+
+## 0.2.1
+
+- Added unspline.
+
 ## 0.2
 
 - Function 'smooth' has a new name; 'sample'.

@@ -17,6 +17,7 @@ module Data.Spline.Polynomial (
   , linear
   , linearBy
   , cosine
+  , cubicHermite
     -- * Helpers
   , bsearchLower
   ) where
@@ -80,6 +81,12 @@ linear = linearBy id
 -- |Cosine polynomial.
 cosine :: (Additive a,Floating s,Ord s) => Polynomial s (a s)
 cosine = linearBy $ \x -> (1 - cos (x * pi)) * 0.5
+
+-- |Cubic hermite interpolation.
+--
+-- Implemented with https://en.wikipedia.org/wiki/Smoothstep.
+cubicHermite :: (Additive a,Fractional s,Ord s) => Polynomial s (a s)
+cubicHermite = linearBy $ \x -> x * x * (3 - 2 * x)
 
 -- |Helper binary search that search the ceiling index for the
 -- value to be searched according to the predicate.
