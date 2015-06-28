@@ -35,7 +35,7 @@ import qualified Data.Vector as V ( zip )
 -- Given two control points which indices are /i/ and /i+1/, interpolation on
 -- the resulting curve is performed using the polynomial of indice /i/. Thus,
 -- the latest control point is ignored and can be set to whatever the user wants
--- to, even 'undefined' – you should use hold, though. Yeah, don’t go filthy.
+-- to, even 'undefined' – you should use 'hold', though. Yeah, don’t go filthy.
 data Spline s a = Spline (Vector (CP s a)) (Vector (Polynomial s a))
 
 -- |Create a spline using a list of control points and associated polynomials.
