@@ -25,9 +25,8 @@ library
                      , DeriveTraversable
 
   exposed-modules:     Data.Spline
-                     , Data.Spline.CP
+                     , Data.Spline.Curve
                      , Data.Spline.Key
-                     , Data.Spline.Polynomial
 
 
   build-depends:       base   >= 4.7  && < 5.0

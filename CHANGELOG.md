@@ -1,3 +1,12 @@
+## 0.3
+
+- Added Bézier interpolation mode.
+- Removed CP type.
+- Removed Polynomial type.
+- Added Key type. It replaces both CP and Polynomial.
+- Enhanced user interface with the library.
+- Internal files refactoring.
+
 ## 0.2.2
 
 - Added cubicHermite.

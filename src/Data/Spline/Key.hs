@@ -12,6 +12,8 @@ module Data.Spline.Key (
     -- * Key type
     Key(..)
   , keyValue
+    -- * interpolation
+  , interpolateKeys
   ) where
 
 import Linear
@@ -30,8 +32,9 @@ import Linear
 -- @CubicHermite v@ represents a cubic hermitian interpolation until the next
 -- key.
 --
--- @Bezier lh v rh@ represents a Bezier interpolation, where 'lh' refers to the
--- left handle of the key and 'rh' is the right handle of the key.
+-- @Bezier l v r@ represents a cubic Bezier interpolation, where 'l' refers
+-- to the input – left – normal of the key and 'r' is the
+-- output – right – normal of the key.
 data Key a
   = Hold a
   | Linear a
@@ -68,9 +71,9 @@ keyValue k = case k of
 interpolateKeys :: (Additive a,Floating s) => s -> Key (a s) -> Key (a s) -> a s
 interpolateKeys s start end = case start of
     Hold k         -> k
-    Linear k       -> lerp s k b
-    Cosine k       -> lerp ((1 - cos (s * pi)) * 0.5) k b
-    CubicHermite k -> lerp (s * s * (3 - 2 * s)) k b
+    Linear k       -> lerp s b k
+    Cosine k       -> lerp ((1 - cos (s * pi)) * 0.5) b k
+    CubicHermite k -> lerp (s * s * (3 - 2 * s)) b k
     Bezier _ k0 r0   -> case end of
       Bezier l1 k1 _ -> interpolateBezier s k0 r0 l1 k1
       _              -> interpolateBezier s k0 r0 r0 b
