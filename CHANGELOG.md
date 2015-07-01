@@ -1,3 +1,7 @@
+## ?
+
+- Fixed sampling implementation.
+
 ## 0.3
 
 - Added Bézier interpolation mode.
