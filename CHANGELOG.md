@@ -2,6 +2,7 @@
 
 - Fixed sampling implementation.
 - Updated documentation.
+- Added normalizeSampling.
 
 ## 0.3
 
