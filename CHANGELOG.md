@@ -1,4 +1,4 @@
-## ?
+## 0.3.1
 
 - Fixed sampling implementation.
 - Updated documentation.
