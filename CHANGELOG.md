@@ -1,6 +1,7 @@
 ## ?
 
 - Fixed sampling implementation.
+- Updated documentation.
 
 ## 0.3
 
