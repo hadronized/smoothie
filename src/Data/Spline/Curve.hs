@@ -62,7 +62,7 @@ sample (Spline keys sampler) at = do
   i <- bsearchLower (\k -> compare at (sampler $ keyValue k)) keys
   k0 <- keys !? i
   k1 <- keys !? (i + 1)
-  pure $ interpolateKeys (normalizeSampling at k0 k1) k0 k1
+  pure $ interpolateKeys (normalizeSampling sampler at k0 k1) k0 k1
 
 -- Helper binary search that searches the ceiling index for the
 -- value to be searched according to the predicate.

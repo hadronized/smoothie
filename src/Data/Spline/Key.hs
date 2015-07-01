@@ -105,7 +105,12 @@ interpolateBezier s k0 r0 l1 k1 = (u ^+^ v) ^* s
 --   sampler (keyValue k1) <= s >= sampler (keyValue k0)
 --   0 <= normalizeSampling sampler s k0 k1 <= 1
 -- @
-normalizeSampling :: (a s -> s) -> s -> Key (a s) -> Key (a s) -> s
+normalizeSampling :: (Fractional s)
+                  => (a s -> s)
+                  -> s
+                  -> Key (a s)
+                  -> Key (a s)
+                  -> s
 normalizeSampling sampler s k0 k1 = (s - s0) / (s1 - s0)
   where
     s0 = sampler (keyValue k0)
