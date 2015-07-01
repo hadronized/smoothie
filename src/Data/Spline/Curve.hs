@@ -60,7 +60,9 @@ spline sampler keys =
 sample :: (Additive a,Floating s,Ord s) => Spline a s -> s -> Maybe (a s)
 sample (Spline keys sampler) at = do
   i <- bsearchLower (\k -> compare at (sampler $ keyValue k)) keys
-  interpolateKeys at <$> keys !? i <*> keys !? (i + 1)
+  k0 <- keys !? i
+  k1 <- keys !? (i + 1)
+  pure $ interpolateKeys (normalizeSampling at k0 k1) k0 k1
 
 -- Helper binary search that searches the ceiling index for the
 -- value to be searched according to the predicate.
