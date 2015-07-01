@@ -1,3 +1,5 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 -----------------------------------------------------------------------------
 -- |
 -- Copyright   : (C) 2015 Dimitri Sabadie
@@ -17,6 +19,7 @@ module Data.Spline.Key (
   , normalizeSampling
   ) where
 
+import Data.Aeson
 import Linear
 
 -- |A 'Key' is a point on the spline with extra information added. It can be,
@@ -51,6 +54,21 @@ instance Functor Key where
     Cosine a       -> Cosine (f a)
     CubicHermite a -> CubicHermite (f a)
     Bezier l a r   -> Bezier (f l) (f a) (f r)
+
+instance (FromJSON a) => FromJSON (Key a) where
+  parseJSON = withObject "key" $ \o -> do
+    interpolation :: String <- o .: "interpolation"
+    value <- o .: "value"
+    if
+      | interpolation == "hold"          -> pure (Hold value)
+      | interpolation == "linear"        -> pure (Linear value)
+      | interpolation == "cosine"        -> pure (Cosine value)
+      | interpolation == "cubic-hermite" -> pure (CubicHermite value)
+      | interpolation == "bezier" -> do
+          left <- o .: "left"
+          right <- o .: "right"
+          pure $ Bezier left value right
+      | otherwise                        -> fail "unknown interpolation mode"
 
 -- |Extract the value out of a 'Key'.
 keyValue :: Key a -> a
