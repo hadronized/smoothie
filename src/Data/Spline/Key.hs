@@ -34,8 +34,8 @@ import Linear
 -- key.
 --
 -- @Bezier l v r@ represents a cubic Bezier interpolation, where 'l' refers
--- to the input – left – normal of the key and 'r' is the
--- output – right – normal of the key.
+-- to the input – left – tangent of the key and 'r' is the
+-- output – right – tangent of the key.
 data Key a
   = Hold a
   | Linear a
@@ -82,7 +82,7 @@ interpolateKeys s start end = case start of
     b = keyValue end
 
 -- @interpolateBezier s k0 r0 l1 k1@ performs a Bezier interpolation
--- between keys 'k0' and 'k1' using their respectives right and left handles.
+-- between keys 'k0' and 'k1' using their respectives right and left tangents.
 interpolateBezier :: (Additive a,Floating s)
                   => s
                   -> a s
