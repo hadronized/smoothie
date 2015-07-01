@@ -14,6 +14,7 @@ module Data.Spline.Key (
   , keyValue
     -- * interpolation
   , interpolateKeys
+  , normalizeSampling
   ) where
 
 import Linear
@@ -93,3 +94,19 @@ interpolateBezier s k0 r0 l1 k1 = (u ^+^ v) ^* s
   where
     u = k0 ^+^ (r0 ^-^ k0) ^* s
     v = l1 ^+^ (k1 ^-^ l1) ^* s
+
+-- |Normalize a sampling value by clamping and scaling it between two keys.
+--
+-- The following laws should be satisfied in order to get a coherent output:
+--
+-- @
+--   sampler :: a s -> s
+--
+--   sampler (keyValue k1) <= s >= sampler (keyValue k0)
+--   0 <= normalizeSampling sampler s k0 k1 <= 1
+-- @
+normalizeSampling :: (a s -> s) -> s -> Key (a s) -> Key (a s) -> s
+normalizeSampling sampler s k0 k1 = (s - s0) / (s1 - s0)
+  where
+    s0 = sampler (keyValue k0)
+    s1 = sampler (keyValue k1)
