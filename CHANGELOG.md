@@ -1,3 +1,7 @@
+## 0.3.2
+
+- Aeson instances for Key.
+
 ## 0.3.1
 
 - Fixed sampling implementation.
