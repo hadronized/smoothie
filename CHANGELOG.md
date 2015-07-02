@@ -1,6 +1,7 @@
 ## 0.3.2
 
-- Aeson instances for Key.
+- FromJSON instances for Curve.
+- FromJSON instances for Key.
 
 ## 0.3.1
 
