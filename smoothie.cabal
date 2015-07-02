@@ -23,6 +23,8 @@ library
   default-extensions:  DeriveFoldable
                      , DeriveFunctor
                      , DeriveTraversable
+                     , FlexibleContexts
+                     , FlexibleInstances
                      , MultiWayIf
                      , ScopedTypeVariables
 
