@@ -1,3 +1,5 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 -----------------------------------------------------------------------------
 -- |
 -- Copyright   : (C) 2015 Dimitri Sabadie
@@ -22,6 +24,7 @@ module Data.Spline.Curve (
   ) where
 
 import Control.Monad ( guard )
+import Data.Aeson
 import Data.List ( sortBy )
 import Data.Ord ( comparing )
 import Data.Spline.Key as X
@@ -39,6 +42,11 @@ data Spline a s = Spline {
     -- |Extract the sampler.
   , splineSampler :: a s -> s
   }
+
+instance (FromJSON (a s), Ord s) => FromJSON ((a s -> s) -> Spline a s) where
+  parseJSON = withObject "spline" $ \o -> do
+    keys <- o .: "keys"
+    pure $ \sampler -> spline sampler keys
 
 -- |Build a 'Spline a s'.
 --
