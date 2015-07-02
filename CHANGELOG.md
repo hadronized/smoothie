@@ -1,6 +1,6 @@
 ## 0.3.2
 
-- FromJSON instances for Curve.
+- FromJSON instances for Spline.
 - FromJSON instances for Key.
 
 ## 0.3.1
