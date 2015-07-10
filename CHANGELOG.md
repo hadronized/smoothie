@@ -1,3 +1,7 @@
+## 0.3.3
+
+- Support for linear-1.19.
+
 ## 0.3.2
 
 - FromJSON instances for Spline.
