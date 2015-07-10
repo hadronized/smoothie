@@ -24,9 +24,9 @@
 -- @ ('Additive' a) => a s @
 --
 -- That is due to the fact some functions work on 'a' as a polymorphic
--- first-class value. That enables more flexibility in the implemantation and
--- the interface. Thus, in most cases, you can any type of your choice as long
--- as it’s an aditive one.
+-- first-class value. That enables more flexibility in the implementation and
+-- the interface. Thus, in most cases, you can use any type of your choice as
+-- long as it’s an additive one.
 ----------------------------------------------------------------------------
 
 module Data.Spline (

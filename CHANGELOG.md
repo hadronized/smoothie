@@ -1,3 +1,7 @@
+## 0.3.3.2
+
+- Fixed typo.
+
 ## 0.3.3.1
 
 - Fixed documentation displaying, which was fucked up almost everywhere.
