@@ -14,7 +14,7 @@ module Data.Spline.Key (
     -- * Key type
     Key(..)
   , keyValue
-    -- * interpolation
+    -- * Interpolation
   , interpolateKeys
   , normalizeSampling
   ) where
@@ -26,17 +26,17 @@ import Linear
 -- for instance, left and right handles for a 'Bezier' curve, or whatever the
 -- interpolation might need.
 --
--- @Hold v@ is used to express no interpolation and holds its latest value until
--- the next key.
+-- @H'old' v@ is used to express no interpolation and holds its latest value
+-- until the next key.
 --
--- @Linear v@ represents a linear interpolation until the next key.
+-- @'Linear' v@ represents a linear interpolation until the next key.
 --
--- @Cosine v@ represents a cosine interpolation until the next key.
+-- @'Cosine' v@ represents a cosine interpolation until the next key.
 --
--- @CubicHermite v@ represents a cubic hermitian interpolation until the next
+-- @'CubicHermite' v@ represents a cubic hermitian interpolation until the next
 -- key.
 --
--- @Bezier l v r@ represents a cubic Bezier interpolation, where 'l' refers
+-- @'Bezier' l v r@ represents a cubic 'Bezier' interpolation, where 'l' refers
 -- to the input – left – tangent of the key and 'r' is the
 -- output – right – tangent of the key.
 data Key a
@@ -79,13 +79,14 @@ keyValue k = case k of
   CubicHermite a -> a
   Bezier _ a _   -> a
 
--- |@interpolateKeys t start end@ interpolates between 'start' and 'end' using
+-- |@'interpolateKeys' t start end@ interpolates between 'start' and 'end' using
 -- 's' as a normalized sampling value.
 --
 -- Satisfies the following laws:
+--
 -- @
---   interpolateKeys 0 start _ = start
---   interpolateKeys 1 _ end   = end
+--   'interpolateKeys' 0 start _ = start
+--   'interpolateKeys' 1 _ end   = end
 -- @
 interpolateKeys :: (Additive a,Floating s) => s -> Key (a s) -> Key (a s) -> a s
 interpolateKeys s start end = case start of
@@ -99,8 +100,8 @@ interpolateKeys s start end = case start of
   where
     b = keyValue end
 
--- @interpolateBezier s k0 r0 l1 k1@ performs a Bezier interpolation
--- between keys 'k0' and 'k1' using their respectives right and left tangents.
+-- @'interpolateBezier' s k0 r0 l1 k1@ performs a 'Bezier' interpolation
+-- between keys 'k0' and 'k1' using their respective right and left tangents.
 interpolateBezier :: (Additive a,Floating s)
                   => s
                   -> a s
@@ -113,15 +114,15 @@ interpolateBezier s k0 r0 l1 k1 = (u ^+^ v) ^* s
     u = k0 ^+^ (r0 ^-^ k0) ^* s
     v = l1 ^+^ (k1 ^-^ l1) ^* s
 
--- |Normalize a sampling value by clamping and scaling it between two keys.
+-- |Normalize a sampling value by clamping and scaling it between two 'Key's.
 --
 -- The following laws should be satisfied in order to get a coherent output:
 --
 -- @
 --   sampler :: a s -> s
 --
---   sampler (keyValue k1) <= s >= sampler (keyValue k0)
---   0 <= normalizeSampling sampler s k0 k1 <= 1
+--   sampler ('keyValue' k1) <= s >= sampler ('keyValue' k0)
+--   0 <= 'normalizeSampling' sampler s k0 k1 <= 1
 -- @
 normalizeSampling :: (Fractional s)
                   => (a s -> s)

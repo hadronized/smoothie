@@ -8,10 +8,13 @@
 -- Maintainer  : Dimitri Sabadie <dimitri.sabadie@gmail.com>
 -- Stability   : experimental
 -- Portability : portable
+--
+-- This module defines 'Spline's and related functions. Because a 'Spline'
+-- requires 'Key's, the "Data.Spline.Key" module is also exported.
 -----------------------------------------------------------------------------
 
 module Data.Spline.Curve (
-    -- * Spline
+    -- * Splines
     Spline
   , splineKeys
   , splineSampler
@@ -20,26 +23,30 @@ module Data.Spline.Curve (
     -- * Sampling splines
   , sample
     -- * Re-exported
-  , module X
+  , module Data.Spline.Key
   ) where
 
 import Control.Monad ( guard )
 import Data.Aeson
 import Data.List ( sortBy )
 import Data.Ord ( comparing )
-import Data.Spline.Key as X
+import Data.Spline.Key
 import Data.Vector ( Vector, (!?), fromList )
 import Linear ( Additive )
 
--- |A @Spline@ is a collection of keys with associated interpolation modes.
--- Given two keys which indices are /i/ and /i+1/, the interpolation mode on the
--- resulting curve is performed using the interpolation mode of the key /i/.
+-- |A @'Spline' a s@ is a collection of 'Key's with associated interpolation
+-- modes.
+--
+-- Given two 'Key's which indices are /i/ and /i+1/, the interpolation mode on
+-- the resulting curve is performed using the interpolation mode of the key /i/.
 -- Thus, the interpolation mode of the latest key might be ignored. There’s an
--- exception, though, when using the 'Bezier' interpolation mode.
+-- exception, though, when using the 'Bezier' interpolation mode. Feel free
+-- to dig in the "Key" documentation.
 data Spline a s = Spline {
-    -- |Extract the keys.
+    -- |Extract the 'Key's.
     splineKeys :: Vector (Key (a s))
-    -- |Extract the sampler.
+    -- |Extract the sampler. The sampler is a function used to extract a
+    -- reference value used to perform several operations on the 'Key's.
   , splineSampler :: a s -> s
   }
 
@@ -48,12 +55,12 @@ instance (FromJSON (a s), Ord s) => FromJSON ((a s -> s) -> Spline a s) where
     keys <- o .: "keys"
     pure $ \sampler -> spline sampler keys
 
--- |Build a 'Spline a s'.
+-- |Build a @'Spline' a s@.
 --
--- 'a s' is the type hold by keys. For instance, @V2 Float@.
+-- @a s@ is the type held by 'Key's. For instance, @'V2' Float@.
 --
--- The first argument of the function, which has type @a s -> s@ is a function
--- used to extract the sampling value of each keys. In most cases, that value
+-- The first argument of the function, which has type @a s -> s@, is a function
+-- used to extract the sampling value of each 'Key's. In most cases, that value
 -- represents the time or the frame of a simulation. That value is used to
 -- perform sampling comparison.
 spline :: (Ord s)
