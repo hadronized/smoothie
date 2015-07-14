@@ -20,6 +20,7 @@ module Data.Spline.Key (
   ) where
 
 import Data.Aeson
+import Data.Text ( Text )
 import Linear
 
 -- |A 'Key' is a point on the spline with extra information added. It can be,
@@ -45,15 +46,7 @@ data Key a
   | Cosine a
   | CubicHermite a
   | Bezier a a a
-    deriving (Eq,Show)
-
-instance Functor Key where
-  fmap f k = case k of
-    Hold a         -> Hold (f a)
-    Linear a       -> Linear (f a)
-    Cosine a       -> Cosine (f a)
-    CubicHermite a -> CubicHermite (f a)
-    Bezier l a r   -> Bezier (f l) (f a) (f r)
+    deriving (Eq,Functor,Show)
 
 instance (FromJSON a) => FromJSON (Key a) where
   parseJSON = withObject "key" $ \o -> do
@@ -70,6 +63,16 @@ instance (FromJSON a) => FromJSON (Key a) where
           pure $ Bezier left value right
       | otherwise                        -> fail "unknown interpolation mode"
 
+instance (ToJSON a) => ToJSON (Key a) where
+  toJSON k = object $
+      ["value" .= value,"interpolation" .= interpolation] ++ tangents
+    where
+      value = keyValue k
+      interpolation = keyInterpolation k
+      tangents = case k of
+        Bezier l _ r -> ["left" .= l,"right" .= r]
+        _            -> []
+
 -- |Extract the value out of a 'Key'.
 keyValue :: Key a -> a
 keyValue k = case k of
@@ -78,6 +81,15 @@ keyValue k = case k of
   Cosine a       -> a
   CubicHermite a -> a
   Bezier _ a _   -> a
+
+-- |Extract the interpolation mode from a 'Key'.
+keyInterpolation :: Key a -> Text
+keyInterpolation k = case k of
+  Hold{}         -> "hold"
+  Linear{}       -> "linear"
+  Cosine{}       -> "cosine"
+  CubicHermite{} -> "cubic-hermite"
+  Bezier{}       -> "bezier"
 
 -- |@'interpolateKeys' t start end@ interpolates between 'start' and 'end' using
 -- 's' as a normalized sampling value.

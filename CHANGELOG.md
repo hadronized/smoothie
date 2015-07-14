@@ -1,3 +1,10 @@
+## 0.3.4
+
+- Added ToJSON instances for Spline.
+- Added ToJSON instances for Key.
+- Added the keyInterpolation function to get a Text version of the
+  interpolation of a Key.
+
 ## 0.3.3.3
 
 - Support for vector-0.11.
