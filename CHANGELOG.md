@@ -1,8 +1,9 @@
 ## 0.4
 
+- `Eq`, `Functor` and `Show` instances for `Spline`.
 - Removed `splineSampler` from `Spline`. It has to be passed to `spline`
   explicitely now on.
-  
+
 ## 0.3.3.3
 
 - Support for vector-0.11.

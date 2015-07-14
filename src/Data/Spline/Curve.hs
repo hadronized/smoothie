@@ -44,7 +44,7 @@ import Linear ( Additive )
 newtype Spline a s = Spline {
     -- |Extract the 'Key's.
     splineKeys :: Vector (Key (a s))
-  }
+  } deriving (Eq,Functor,Show)
 
 instance (FromJSON (a s), Ord s) => FromJSON ((a s -> s) -> Spline a s) where
   parseJSON = withObject "spline" $ \o -> do

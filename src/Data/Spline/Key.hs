@@ -45,15 +45,7 @@ data Key a
   | Cosine a
   | CubicHermite a
   | Bezier a a a
-    deriving (Eq,Show)
-
-instance Functor Key where
-  fmap f k = case k of
-    Hold a         -> Hold (f a)
-    Linear a       -> Linear (f a)
-    Cosine a       -> Cosine (f a)
-    CubicHermite a -> CubicHermite (f a)
-    Bezier l a r   -> Bezier (f l) (f a) (f r)
+    deriving (Eq,Functor,Show)
 
 instance (FromJSON a) => FromJSON (Key a) where
   parseJSON = withObject "key" $ \o -> do
