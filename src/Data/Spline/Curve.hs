@@ -47,9 +47,12 @@ newtype Spline a s = Spline {
   } deriving (Eq,Functor,Show)
 
 instance (FromJSON (a s), Ord s) => FromJSON ((a s -> s) -> Spline a s) where
-  parseJSON = withObject "spline" $ \o -> do
-    keys <- o .: "keys"
+  parseJSON value = do
+    keys <- parseJSON value
     pure $ \sampler -> spline sampler keys
+
+instance (ToJSON (a s)) => ToJSON (Spline a s) where
+  toJSON = Array . fmap toJSON . splineKeys
 
 -- |Build a @'Spline' a s@.
 --
