@@ -1,9 +1,17 @@
-## 0.3.4
+## 0.4
+
+### Breaking changes
+
+- Removed `splineSampler` from `Spline`. It has to be passed to `spline`
+  explicitely now on.
+
+### Non-breaking changes
 
 - Added ToJSON instances for Spline.
 - Added ToJSON instances for Key.
 - Added the keyInterpolation function to get a Text version of the
   interpolation of a Key.
+- `Eq`, `Functor` and `Show` instances for `Spline`.
 
 ## 0.3.3.3
 

@@ -17,7 +17,6 @@ module Data.Spline.Curve (
     -- * Splines
     Spline
   , splineKeys
-  , splineSampler
     -- * Building splines
   , spline
     -- * Sampling splines
@@ -42,13 +41,10 @@ import Linear ( Additive )
 -- Thus, the interpolation mode of the latest key might be ignored. There’s an
 -- exception, though, when using the 'Bezier' interpolation mode. Feel free
 -- to dig in the "Key" documentation.
-data Spline a s = Spline {
+newtype Spline a s = Spline {
     -- |Extract the 'Key's.
     splineKeys :: Vector (Key (a s))
-    -- |Extract the sampler. The sampler is a function used to extract a
-    -- reference value used to perform several operations on the 'Key's.
-  , splineSampler :: a s -> s
-  }
+  } deriving (Eq,Functor,Show)
 
 instance (FromJSON (a s), Ord s) => FromJSON ((a s -> s) -> Spline a s) where
   parseJSON = withObject "spline" $ \o -> do
@@ -67,13 +63,19 @@ spline :: (Ord s)
        => (a s -> s)
        -> [Key (a s)]
        -> Spline a s
-spline sampler keys =
-  Spline (fromList $ sortBy (comparing $ sampler . keyValue) keys) sampler
+spline sampler = Spline . fromList . sortBy (comparing $ sampler . keyValue)
 
 -- |Sample a 'Spline' at a given 's' sampling value. If no sample exists,
 -- yields 'Nothing'.
-sample :: (Additive a,Floating s,Ord s) => Spline a s -> s -> Maybe (a s)
-sample (Spline keys sampler) at = do
+--
+-- The first parameter is a /sampler/ function used to extract a comparison
+-- value. For most curves, the reflected value should be the time or the frame.
+sample :: (Additive a,Floating s,Ord s)
+       => (a s -> s)
+       -> Spline a s
+       -> s
+       -> Maybe (a s)
+sample sampler (Spline keys) at = do
   i <- bsearchLower (\k -> compare at (sampler $ keyValue k)) keys
   k0 <- keys !? i
   k1 <- keys !? (i + 1)
