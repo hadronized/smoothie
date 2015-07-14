@@ -1,3 +1,7 @@
+## 0.3.3.3
+
+- Support for vector-0.11.
+
 ## 0.3.3.2
 
 - Fixed typo.
