@@ -19,7 +19,6 @@ cabal-version:       >= 1.10
 data-files:  CHANGELOG.md
 
 library
-
   ghc-options:         -W -Wall -O2 -funbox-strict-fields
 
   default-extensions:  DeriveFoldable
