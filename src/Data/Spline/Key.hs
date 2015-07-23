@@ -121,10 +121,14 @@ interpolateBezier :: (Additive a,Floating s)
                   -> a s
                   -> a s
                   -> a s
-interpolateBezier s k0 r0 l1 k1 = (u ^+^ v) ^* s
+interpolateBezier s k0 r0 l1 k1 =
+    k0 ^* ms3 ^+^ r0 ^* (3 * ms2 * s) ^+^ l1 ^* (3 * ms * s2) ^+^ k1 ^* s3
   where
-    u = k0 ^+^ (r0 ^-^ k0) ^* s
-    v = l1 ^+^ (k1 ^-^ l1) ^* s
+    ms = 1 - s
+    ms2 = ms * ms
+    ms3 = ms2 * ms
+    s2 = s * s
+    s3 = s2 * s
 
 -- |Normalize a sampling value by clamping and scaling it between two 'Key's.
 --

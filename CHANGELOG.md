@@ -1,3 +1,7 @@
+## 0.4.0.1
+
+- Fixed Bézier interpolation.
+
 ## 0.4
 
 ### Breaking changes
