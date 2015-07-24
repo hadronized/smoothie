@@ -1,3 +1,7 @@
+## 0.4.0.2
+
+- Relaxed lower-bounds for aeson to support aeson-0.8.
+
 ## 0.4.0.1
 
 - Fixed Bézier interpolation.
