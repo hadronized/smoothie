@@ -1,3 +1,7 @@
+## 0.4.1
+
+- Added support for linear-1.20.
+
 ## 0.4.0.2
 
 - Relaxed lower-bounds for aeson to support aeson-0.8.
