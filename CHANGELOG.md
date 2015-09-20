@@ -1,3 +1,7 @@
+## 0.4.2
+
+- Support for aeson-0.10.
+
 ## 0.4.1
 
 - Added support for linear-1.20.

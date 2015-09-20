@@ -32,6 +32,7 @@ import Data.Ord ( comparing )
 import Data.Spline.Key
 import Data.Vector ( Vector, (!?), fromList )
 import Linear ( Additive )
+import GHC.Generics ( Generic )
 
 -- |A @'Spline' a s@ is a collection of 'Key's with associated interpolation
 -- modes.
@@ -44,7 +45,7 @@ import Linear ( Additive )
 newtype Spline a s = Spline {
     -- |Extract the 'Key's.
     splineKeys :: Vector (Key (a s))
-  } deriving (Eq,Functor,Show)
+  } deriving (Eq,Generic,Functor,Show)
 
 instance (FromJSON (a s), Ord s) => FromJSON ((a s -> s) -> Spline a s) where
   parseJSON value = do
@@ -52,7 +53,8 @@ instance (FromJSON (a s), Ord s) => FromJSON ((a s -> s) -> Spline a s) where
     pure $ \sampler -> spline sampler keys
 
 instance (ToJSON (a s)) => ToJSON (Spline a s) where
-  toJSON = Array . fmap toJSON . splineKeys
+  toJSON     = genericToJSON defaultOptions
+  toEncoding = genericToEncoding defaultOptions
 
 -- |Build a @'Spline' a s@.
 --
