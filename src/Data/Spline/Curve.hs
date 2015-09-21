@@ -1,4 +1,4 @@
-{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE CPP, OverloadedStrings #-}
 
 -----------------------------------------------------------------------------
 -- |
@@ -53,8 +53,12 @@ instance (FromJSON (a s), Ord s) => FromJSON ((a s -> s) -> Spline a s) where
     pure $ \sampler -> spline sampler keys
 
 instance (ToJSON (a s)) => ToJSON (Spline a s) where
+#if MIN_VERSION_aeson(0,10,0)
   toJSON     = genericToJSON defaultOptions
   toEncoding = genericToEncoding defaultOptions
+#else
+  toJSON = Array . fmap toJSON . splineKeys
+#endif
 
 -- |Build a @'Spline' a s@.
 --

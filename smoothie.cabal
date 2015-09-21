@@ -1,5 +1,5 @@
 name:                smoothie
-version:             0.4.2
+version:             0.4.2.1
 synopsis:            Smooth curves via several interpolation modes
 description:         This package exports several splines you can use
                      to interpolate points in between. It includes instances for
@@ -29,6 +29,9 @@ library
                      , FlexibleInstances
                      , MultiWayIf
                      , ScopedTypeVariables
+
+  other-extensions:    CPP
+                     , OverloadedStrings
 
   exposed-modules:     Data.Spline
                      , Data.Spline.Curve

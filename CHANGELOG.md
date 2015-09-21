@@ -1,3 +1,7 @@
+## 0.4.2.1
+
+- Fixed backward compatibility with aeson-0.10.
+
 ## 0.4.2
 
 - Support for aeson-0.10.
