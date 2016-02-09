@@ -1,4 +1,8 @@
-## 0.4.2.1
+### 0.4.2.2
+
+- Support for aeson-0.11.
+
+### 0.4.2.1
 
 - Fixed backward compatibility with aeson-0.10.
 
@@ -10,22 +14,22 @@
 
 - Added support for linear-1.20.
 
-## 0.4.0.2
+### 0.4.0.2
 
 - Relaxed lower-bounds for aeson to support aeson-0.8.
 
-## 0.4.0.1
+### 0.4.0.1
 
 - Fixed Bézier interpolation.
 
-## 0.4
+# 0.4
 
-### Breaking changes
+#### Breaking changes
 
 - Removed `splineSampler` from `Spline`. It has to be passed to `spline`
   explicitely now on.
 
-### Non-breaking changes
+#### Non-breaking changes
 
 - Added ToJSON instances for Spline.
 - Added ToJSON instances for Key.
@@ -33,15 +37,15 @@
   interpolation of a Key.
 - `Eq`, `Functor` and `Show` instances for `Spline`.
 
-## 0.3.3.3
+### 0.3.3.3
 
 - Support for vector-0.11.
 
-## 0.3.3.2
+### 0.3.3.2
 
 - Fixed typo.
 
-## 0.3.3.1
+### 0.3.3.1
 
 - Fixed documentation displaying, which was fucked up almost everywhere.
 
@@ -60,7 +64,7 @@
 - Updated documentation.
 - Added normalizeSampling.
 
-## 0.3
+# 0.3
 
 - Added Bézier interpolation mode.
 - Removed CP type.
@@ -77,7 +81,7 @@
 
 - Added unspline.
 
-## 0.2
+# 0.2
 
 - Function 'smooth' has a new name; 'sample'.
 - Enhanced internal implementation.
@@ -95,11 +99,11 @@
 
 - Support for linear 1.17.*.
 
-## 0.1.0.1
+### 0.1.0.1
 
 - Fixed cabal meta information.
 - Fixed haddock documentation.
 
-## 0.1
+# 0.1
 
 - Initial revision.
