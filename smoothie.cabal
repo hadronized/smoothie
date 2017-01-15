@@ -1,5 +1,5 @@
 name:                smoothie
-version:             0.4.2.5
+version:             0.4.2.6
 synopsis:            Smooth curves via several interpolation modes
 description:         This package exports several splines you can use
                      to interpolate points in between. It includes instances for
@@ -38,7 +38,7 @@ library
                      , Data.Spline.Key
 
 
-  build-depends:       base   >= 4.7  && < 5.0
+  build-depends:       base   >= 4.8  && < 5.0
                      , aeson  >= 0.8  && < 1.2
                      , linear >= 1.16 && < 1.21
                      , text   >= 1.2  && < 1.3
