@@ -1,9 +1,10 @@
-resolver: lts-7.15
+resolver: lts-8.11
 
 packages:
 - '.'
 
-extra-deps: []
+extra-deps:
+  - aeson-1.2.0.0
 
 flags: {}
 
