@@ -1,3 +1,7 @@
+### 0.4.2.9
+
+- Support for aeson-1.4.
+
 ### 0.4.2.8
 
 - Support for aeson-1.3.0.0.
