@@ -1,129 +1,135 @@
-### 0.4.2.10
+# 0.4.2.11
 
-- Support for linear-0.21.
+> Sun May 31th 2020
 
-### 0.4.2.9
+- Support for `aeson-1.5`.
 
-- Support for aeson-1.4.
+# 0.4.2.10
 
-### 0.4.2.8
+- Support for `linear-0.21`.
 
-- Support for aeson-1.3.0.0.
+# 0.4.2.9
 
-### 0.4.2.7
+- Support for `aeson-1.4`.
 
-- Support for aeson-1.2.0.0.
+# 0.4.2.8
 
-### 0.4.2.4
+- Support for `aeson-1.3`.
 
-- Support for aeson-1.1.
+# 0.4.2.7
 
-### 0.4.2.3
+- Support for `aeson-1.2`.
 
-- Support for aeson-1.0.
+# 0.4.2.4
 
-### 0.4.2.2
+- Support for `aeson-1.1`.
 
-- Support for aeson-0.11.
+# 0.4.2.3
 
-### 0.4.2.1
+- Support for `aeson-1.0`.
 
-- Fixed backward compatibility with aeson-0.10.
+# 0.4.2.2
 
-## 0.4.2
+- Support for `aeson-0.11`.
 
-- Support for aeson-0.10.
+# 0.4.2.1
 
-## 0.4.1
+- Fixed backward compatibility with `aeson-0.10`.
 
-- Added support for linear-1.20.
+# 0.4.2
 
-### 0.4.0.2
+- Support for `aeson-0.10`.
 
-- Relaxed lower-bounds for aeson to support aeson-0.8.
+# 0.4.1
 
-### 0.4.0.1
+- Added support for `linear-1.20`.
+
+# 0.4.0.2
+
+- Relaxed lower-bounds for aeson to support `aeson-0.8`.
+
+# 0.4.0.1
 
 - Fixed Bézier interpolation.
 
 # 0.4
 
-#### Breaking changes
+# Breaking changes
 
 - Removed `splineSampler` from `Spline`. It has to be passed to `spline`
   explicitely now on.
 
-#### Non-breaking changes
+# Non-breaking changes
 
-- Added ToJSON instances for Spline.
-- Added ToJSON instances for Key.
-- Added the keyInterpolation function to get a Text version of the
-  interpolation of a Key.
+- Added `ToJSON` instances for `Spline`.
+- Added `ToJSON` instances for `Key`.
+- Added the `keyInterpolation` function to get a `Text` version of the
+  interpolation of a `Key`.
 - `Eq`, `Functor` and `Show` instances for `Spline`.
 
-### 0.3.3.3
+# 0.3.3.3
 
-- Support for vector-0.11.
+- Support for `vector-0.11`.
 
-### 0.3.3.2
+# 0.3.3.2
 
 - Fixed typo.
 
-### 0.3.3.1
+# 0.3.3.1
 
 - Fixed documentation displaying, which was fucked up almost everywhere.
 
-## 0.3.3
+# 0.3.3
 
-- Support for linear-1.19.
+- Support for `linear-1.19`.
 
-## 0.3.2
+# 0.3.2
 
-- FromJSON instances for Spline.
-- FromJSON instances for Key.
+- `FromJSON` instances for `Spline`.
+- `FromJSON` instances for `Key`.
 
-## 0.3.1
+# 0.3.1
 
 - Fixed sampling implementation.
 - Updated documentation.
-- Added normalizeSampling.
+- Added `normalizeSampling`.
 
 # 0.3
 
 - Added Bézier interpolation mode.
-- Removed CP type.
-- Removed Polynomial type.
-- Added Key type. It replaces both CP and Polynomial.
+- Removed the `CP` type.
+- Removed the `Polynomial `type.
+- Added the `Key` type. It replaces both `CP` and `Polynomial`.
 - Enhanced user interface with the library.
 - Internal files refactoring.
 
-## 0.2.2
+# 0.2.2
 
-- Added cubicHermite.
+- Added `cubicHermite`.
 
-## 0.2.1
+# 0.2.1
 
-- Added unspline.
+- Added `unspline`.
 
 # 0.2
 
-- Function 'smooth' has a new name; 'sample'.
+- Function `smooth` has a new name; `sample`.
 - Enhanced internal implementation.
 - Fixed some documentation formatting issues.
 
-## 0.1.3
+# 0.1.3
 
 - Support for GHC 7.10.
 
-## 0.1.2
+# 0.1.2
 
-- Support for linear 1.18.*.
+- Support for `linear-1.18`.
 
-## 0.1.1
+# 0.1.1
 
-- Support for linear 1.17.*.
+- Support for `linear-1.17`.
 
-### 0.1.0.1
+# 0.1.0.1
 
 - Fixed cabal meta information.
 - Fixed haddock documentation.
